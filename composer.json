@@ -1,0 +1,16 @@
+{
+    "name": "bertil/data-navigator",
+    "description": "scraping de site web",
+    "autoload": {
+        "psr-4": {
+            "Bertil\\DataNavigator\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "jb974",
+            "email": "bertil974@hotmail.fr"
+        }
+    ],
+    "require": {}
+}
