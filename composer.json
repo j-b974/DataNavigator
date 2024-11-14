@@ -12,5 +12,7 @@
             "email": "bertil974@hotmail.fr"
         }
     ],
-    "require": {}
+    "require": {
+        "php-webdriver/webdriver": "^1.1"
+    }
 }
