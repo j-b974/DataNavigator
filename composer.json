@@ -15,5 +15,12 @@
     "require": {
         "php-webdriver/webdriver": "^1.1",
         "facebook/webdriver": "^1.1"
+    },
+    "scripts": {
+        "start-selenium": [
+            "docker run -d -p 4444:4444 -p 7900:7900 --shm-size=2g selenium/standalone-chrome:latest"
+        ]
+
     }
+
 }

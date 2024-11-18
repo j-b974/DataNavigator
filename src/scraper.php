@@ -9,7 +9,7 @@ use Facebook\WebDriver\Chrome\ChromeOptions;
 require_once('../vendor/autoload.php');
 
 // the URL to the local Selenium Server
-$host = 'http://localhost:4444/';
+$host = 'http://localhost:4444/wd/hub';
 
 // to control a Chrome instance
 $capabilities = DesiredCapabilities::chrome();
@@ -17,13 +17,13 @@ $capabilities = DesiredCapabilities::chrome();
 // define the browser options
 $chromeOptions = new ChromeOptions();
 // to run Chrome in headless mode [pas de fenetre chrome]
-$chromeOptions->addArguments(['--headless']); // <- comment out for testing
+$chromeOptions->addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage','--remote-debugging-port=9222']); // <- comment out for testing
 
 // register the Chrome options
 $capabilities->setCapability(ChromeOptions::CAPABILITY, $chromeOptions);
 
 // initialize a driver to control a Chrome instance
-$driver = RemoteWebDriver::create($host, $capabilities);
+$driver = RemoteWebDriver::create($host, $capabilities , 120000);
 
 // maximize the window to avoid responsive rendering
 $driver->manage()->window()->maximize();

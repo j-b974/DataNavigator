@@ -9,8 +9,8 @@ use Facebook\WebDriver\WebDriverBy;
 require_once('../vendor/autoload.php');
 
 // the URL to the local Selenium Server
-$host = 'http://localhost:4444/';
-$sessionID = '2d8b6b4ab6d75a7f0cd695bf2455c71e';
+$host = 'http://localhost:4444/wd/hub';
+$sessionID = '8c5f6efcce0d0453059d793f92b8b743';
 
 // to control a Chrome instance
 $capabilities = DesiredCapabilities::chrome();
@@ -26,7 +26,7 @@ $capabilities->setCapability(ChromeOptions::CAPABILITY, $chromeOptions);
 
 try {
     // initialize a driver to control a Chrome instance
-    $driver = RemoteWebDriver::createBySessionID($sessionID, $host);
+    $driver = RemoteWebDriver::createBySessionID($sessionID, $host );
 
     // maximize the window to avoid responsive rendering
     //$driver->manage()->window()->maximize();
@@ -41,6 +41,7 @@ try {
 
     // Close the browser
     $driver->quit();
+
 } catch (\Exception $e) {
     echo 'Error: ' . $e->getMessage();
 }
