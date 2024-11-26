@@ -8,10 +8,10 @@ use Facebook\WebDriver\Remote\DesiredCapabilities;
 
 $host = 'http://localhost:4444/';
 
-$pathExtentionVPN = dirname(__DIR__, 1).DIRECTORY_SEPARATOR.'extension_chrome'.DIRECTORY_SEPARATOR.'3.1.7_0.crx';
+$pathExtentionVPN = dirname(__DIR__, 1).DIRECTORY_SEPARATOR.'extension_chrome'.DIRECTORY_SEPARATOR.'2.0.10_0.crx';
 
-$idExtention = "majdfhpaihoncoakbjgbdhglocklcgno";
-$ud = "lmemhnhlhjipenikeogplkcojdpabego";
+$idExtention = "fcfhplploccackoneaefokcmbjfbken";
+
 // to control a Chrome instance
 $capabilities = DesiredCapabilities::chrome();
 

@@ -1,0 +1,12 @@
+[
+    {
+        "name": "lila2",
+        "value": "472753b5ee2adf9f25a3d2f4149dedc84010906b-sid=qhoouO0ILpn2AUINUjJtvc&sessionId=XxrmMYUGoNvkGbycpwY5ck",
+        "path": "\/",
+        "domain": ".lichess.org",
+        "expiry": 1767162490,
+        "secure": true,
+        "httpOnly": true,
+        "sameSite": "Lax"
+    }
+]
