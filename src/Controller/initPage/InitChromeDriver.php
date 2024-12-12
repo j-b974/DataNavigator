@@ -72,6 +72,8 @@ class InitChromeDriver
     {
         if (file_exists('cookie.json')) {
             $cookies = json_decode(file_get_contents('cookie.json'), true);
+            echo "Cookies en chargement !!! \n";
+            print_r($cookies);
             foreach ($cookies as $cookie) {
                 $this->driver->manage()->addCookie($cookie);
             }
