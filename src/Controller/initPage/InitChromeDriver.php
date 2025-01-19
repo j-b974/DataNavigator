@@ -6,6 +6,7 @@ use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\WebDriverBy;
+use Facebook\WebDriver\WebDriverWait;
 
 class InitChromeDriver
 {
@@ -48,6 +49,15 @@ class InitChromeDriver
             // Actualiser la page pour utiliser les cookies
             $this->driver->navigate()->refresh();
         }
+        try{
+            $wait = new WebDriverWait($this->driver, 10); // 10 secondes max
+            $wait->until(function($driver) {
+                return $driver->executeScript("return document.readyState") === "complete";
+            });
+        }catch(\Exception $e){
+            echo"page non recharge". $e->getMessage();
+        }
+
         return $driver;
     }
 
@@ -62,7 +72,7 @@ class InitChromeDriver
         $cookiesArray = array_map(function ($cookie) {
             return $cookie->toArray();
         }, $cookies);
-        print_r($cookiesArray);
+
         // Encodez les tableaux en JSON
         $jsonCookies = json_encode($cookiesArray, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
         file_put_contents('cookie.json', $jsonCookies);
@@ -73,12 +83,15 @@ class InitChromeDriver
         if (file_exists('cookie.json')) {
             $cookies = json_decode(file_get_contents('cookie.json'), true);
             echo "Cookies en chargement !!! \n";
-            print_r($cookies);
+
             foreach ($cookies as $cookie) {
                 $this->driver->manage()->addCookie($cookie);
             }
             echo "Cookies chargés.\n";
         }
     }
-
+    public function getChromeDriver():RemoteWebDriver
+    {
+        return $this->driver;
+    }
 }

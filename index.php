@@ -1,6 +1,7 @@
 <?php
 
 
+use Facebook\WebDriver\Exception\WebDriverException;
 use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 use Facebook\WebDriver\WebDriverWait;
@@ -20,34 +21,15 @@ $dotenv->load();
 
 $chromeDrive = new \App\Controller\initPage\InitChromeDriver();
 
-$webHome = $chromeDrive->getPage($_ENV['DOMAIN'], true);
+$webHome = \App\LoginOgame::init($chromeDrive);
 
-// recuperer le bouton puis clique dessus
-$waitBtn = new WebDriverWait($webHome,5);
+echo "page homme ".PHP_EOL;
 
-try {
-    $btn = $waitBtn->until(WebDriverExpectedCondition::presenceOfElementLocated(WebDriverBy::cssSelector("a#user_tag")));
-    echo "connexion ok !!!";
-}catch (\Exception $e){
-
-    echo "Connexion échouée : " . $e->getMessage();
-    $webSignin = $chromeDrive->getPage($_ENV['DOMAIN'].'login');
-    // initiliser une connection !
-    $formLogin = new \App\Controller\element\LoginPage($webSignin);
-    $formLogin->addInput('username', $_ENV['LOGIN_USERNAME'])
-        ->addInput('password', $_ENV['LOGIN_PASSWORD'])
-        ->addInput('remember','true');
-    $formLogin->AppliqueValue();
-    // Cliquer sur le bouton de connexion
-    $btn = $formLogin->getButton('button[type="submit"]');
-    $btn[1]->click();
-
-// Attendre que la page d'accueil apparaisse
-//$pageCon->wait(10, 500)->until(
-    //WebDriverExpectedCondition::titleContains('administration')
-//);
-    sleep(2);
-    $chromeDrive->saveCookie();
+// accee a l'univers !
+$waitBtnUnivers = new WebDriverWait($webHome,10);
+try{
+    $btnUnivers =  $waitBtnUnivers->until(WebDriverExpectedCondition::presenceOfElementLocated(WebDriverBy::cssSelector("div.accountNavButton")));
+    echo "univers ok !".PHP_EOL;
+}catch(WebDriverException $e){
+    echo 'pas bouton Univers: '.$e->getMessage();
 }
-//$pageCon->close();
-//$btn= $pageCon->findElement(WebDriverBy::cssSelector(".logout button[type='submit']"));
