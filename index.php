@@ -15,10 +15,6 @@ $dotenv = Dotenv::createImmutable(__DIR__);
 
 $dotenv->load();
 
-// todo : appeller la page ogame .
-//  => verifisicoiton sion connection
-
-
 $chromeDrive = new \App\Controller\initPage\InitChromeDriver();
 
 $webHome = \App\LoginOgame::init($chromeDrive);

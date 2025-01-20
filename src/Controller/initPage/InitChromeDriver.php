@@ -21,10 +21,20 @@ class InitChromeDriver
         // to control a Chrome instance
         $capabilities = DesiredCapabilities::chrome();
 
+        // chemin chrome extention
+        $pathExtentionOgameHack = dirname(__DIR__, 3).DIRECTORY_SEPARATOR.'extension_chrome'.DIRECTORY_SEPARATOR.'OgameHack.crx';
+
+        // id extention "
+        $idExtention = "ljckpgpjoikgafpnpjglpjnefelkfpkh";
+
         // define the browser options
         $chromeOptions = new ChromeOptions();
         // to run Chrome in headless mode [pas de fenetre chrome]
-        $chromeOptions->addArguments([ '--no-sandbox', '--disable-dev-shm-usage','--remote-debugging-port=9222']); // <- comment out for testing
+
+        // ajoute extention ogameHack
+        $chromeOptions->addExtensions([$pathExtentionOgameHack]);
+
+        $chromeOptions->addArguments(['--no-sandbox', '--disable-dev-shm-usage','--remote-debugging-port=9222']); // <- comment out for testing
 
         // register the Chrome options
         $capabilities->setCapability(ChromeOptions::CAPABILITY, $chromeOptions);
